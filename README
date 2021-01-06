@@ -1,0 +1,69 @@
+-- README
+-- Author: Fabian L. Cabrera
+-- e-mail: fabian.c at ufsc.br
+---------------------------------------------------
+
+FPGAemu is the emulator of a generic FPGA-based board intended for teaching basics of digital circuits design.
+
+---------------------------------------------------
+Requirements:
+---------------------------------------------------
+
+ghdl (with GCC or LLVM back-end)*
+gtk3
+pthread
+
+*Note that the emulator can not be used with the ghdl mcode back-end. For more information visit:
+
+https://ghdl.readthedocs.io/en/latest/getting/index.html
+
+---------------------------------------------------
+Installation:
+---------------------------------------------------
+
+Download the latest release available in
+
+http://fabian.paginas.ufsc.br/tools/fpgaemu
+
+Uncompact, configure and install with the following commands:
+
+tar xvfz fpgaemu-*.tar.gz 
+cd fpgaemu-*
+./configure
+make
+make install
+
+Note: if ghdl is installed in a non-standard path (for example: /opt/local/bin), it can be informed in the configure line command:
+
+./configure --with-ghdl=/opt/local/bin/ghdl
+
+---------------------------------------------------
+Using FPGAemu:
+---------------------------------------------------
+
+Copy the examples folder to your home directory the use the commands:
+
+cd examples/io
+fpgacompile usertop.vhd
+./fpgatest
+
+Same procedure can be used to run the "register" and "counter" examples.
+
+The main VHDL file always must be named "usertop.vhd". Also the port definitions of "usertop.vhd" must be always kept the same:
+
+CLOCK_50:	Not used, always equal to '0';
+CLK_500Hz:      500Hz clock signal;
+RKEY:           Equal to KEY;
+KEY:            Four-buttons input ('0'-pressed, '1'-released);
+RSW:            Equal to SW;
+SW:             Eighteen input switches;
+LEDR:           Eighteen output red LEDs;
+HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7 : Eight seven-segments displays.
+
+
+In case of multiple VHDL files, they must be listed following a hierarquical order. For example, if "block.vhd" is a component used in "usertop.vhd" then the commands to run the emulator must be:
+
+fpgacompile block.vhd usertop.vhd
+./fpgatest
+
+

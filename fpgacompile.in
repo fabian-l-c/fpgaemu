@@ -1,0 +1,9 @@
+rm -fr *.o
+rm -fr e~testbench.*
+rm -fr work-obj*
+rm -fr fpgatest
+
+GHDL_BIN -a -fexplicit --ieee=synopsys DATADIR/fpgaemu.vhd $* DATADIR/fpgatest.vhd
+
+GHDL_BIN -e -fexplicit --ieee=synopsys WLCLIBS -Wl,-lpthread -Wl,DATADIR/fpgaemu_c.o fpgatest
+
