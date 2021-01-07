@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([fpgaemu],[1.0],[fabian.c at ufsc.br])
+AC_INIT([fpgaemu],[1.1],[fabian.c at ufsc.br])
 AC_CONFIG_SRCDIR([fpgaemu.c])
 
 AM_INIT_AUTOMAKE
