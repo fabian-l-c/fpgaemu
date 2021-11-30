@@ -5,5 +5,5 @@ rm -fr fpgatest
 
 GHDL_BIN -a -fexplicit --ieee=synopsys DATADIR/fpgaemu.vhd $* DATADIR/fpgatest.vhd
 
-GHDL_BIN -e -fexplicit --ieee=synopsys WLCLIBS -Wl,-lpthread -Wl,DATADIR/fpgaemu_c.o fpgatest
+GHDL_BIN -e -fexplicit --ieee=synopsys -Wl,DATADIR/fpgaemu_c.o WLCLIBS -Wl,-lpthread fpgatest
 
