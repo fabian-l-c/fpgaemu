@@ -2,6 +2,6 @@ rm -fr *.vvp
 rm -fr vfpgatest
 
 iverilog -ovfpgaemu.vvp $* DATADIR/vfpgaemu.v
-echo "vvp -M. -mvfpgaemu vfpgaemu.vvp">vfpgatest
+echo "vvp -MDATADIR -mvfpgaemu vfpgaemu.vvp">vfpgatest
 chmod 700 vfpgatest
 
