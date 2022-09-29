@@ -11,6 +11,7 @@ AM_INIT_AUTOMAKE
 # Checks for programs.
 AC_PROG_CC
 AX_PTHREAD()
+AM_PATH_GTK_3_0()
 PKG_CHECK_MODULES([GTK3], [gtk+-3.0])
 
 GHDL_BIN=ghdl

@@ -12,6 +12,7 @@ Requirements:
 ghdl (with GCC or LLVM back-end)*
 gtk3
 pthread
+icarus verilog (New for verilog support)
 
 *Note that the emulator can not be used with the ghdl mcode back-end. For more information visit:
 
@@ -38,10 +39,10 @@ Note: if ghdl is installed in a non-standard path (for example: /opt/local/bin),
 ./configure --with-ghdl=/opt/local/bin/ghdl
 
 ---------------------------------------------------
-Using FPGAemu:
+Using FPGAemu with VHDL:
 ---------------------------------------------------
 
-Copy the examples folder to your home directory the use the commands:
+Copy the examples folder to your home directory, then use the commands:
 
 cd examples/io
 fpgacompile usertop.vhd
@@ -65,5 +66,34 @@ In case of multiple VHDL files, they must be listed following a hierarquical ord
 
 fpgacompile block.vhd usertop.vhd
 ./fpgatest
+
+---------------------------------------------------
+Using FPGAemu with verilog:
+---------------------------------------------------
+
+Copy the vexamples folder to your home directory, then use the commands:
+
+cd vexamples/io
+vfpgacompile usertop.v
+./vfpgatest
+
+Same procedure can be used to run the "register" and "counter" examples.
+
+The main verilog module always must be named "usertop". Also the port definitions of "usertop.v" must be always kept the same:
+
+CLOCK_50:	Not used, always equal to '0';
+CLK_500Hz:      500Hz clock signal;
+RKEY:           Equal to KEY;
+KEY:            Four-buttons input ('0'-pressed, '1'-released);
+RSW:            Equal to SW;
+SW:             Eighteen input switches;
+LEDR:           Eighteen output red LEDs;
+HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,HEX6,HEX7 : Eight seven-segments displays.
+
+
+In case of multiple verilog files, they must be listed following a hierarquical order. For example, if "block.v" is a component used in "usertop.v" then the commands to run the emulator must be:
+
+vfpgacompile block.v usertop.v
+./vfpgatest
 
 
